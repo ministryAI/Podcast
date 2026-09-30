@@ -5,34 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Podcast Studio</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-<main class="landing">
-  <div class="box">
-    <div class="logo"><span class="dot"></span> Podcast Studio</div>
-    <h1>Record your show,<br>from anywhere.</h1>
-    <p class="lead">Start a session, send your guests one link, and every person records in high quality on their own computer.</p>
-    <form class="card" id="start">
-      <label class="field"><span>Show name</span><input id="show" required placeholder="My Podcast"></label>
-      <label class="field"><span>Your name</span><input id="name" required placeholder="Host"></label>
-      <label class="field"><span>Session password (optional)</span><input id="pw" placeholder="Keeps randoms out"></label>
-      <button class="btn">Start session →</button>
-    </form>
-    <p class="foot">Guests? Use the link your host sent you. · <a href="tools/">Advanced links for OBS</a></p>
-  </div>
-</main>
-<script>
-  const $ = id => document.getElementById(id);
-  try { const s = JSON.parse(localStorage.getItem('studio-host') || '{}'); $('show').value = s.show || ''; $('name').value = s.name || ''; } catch {}
-  $('start').onsubmit = e => {
-    e.preventDefault();
-    const show = $('show').value.trim(), name = $('name').value.trim();
-    try { localStorage.setItem('studio-host', JSON.stringify({ show, name })); } catch {}
-    const room = (show.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 16) || 'show') + Math.random().toString(36).slice(2, 8);
-    const q = new URLSearchParams({ room, show, name, host: '1' });
-    if ($('pw').value) q.set('pw', $('pw').value);
-    location.href = 'studio.html?' + q;
-  };
-</script>
+<div class="app">
+  <aside class="side" id="side">
+    <a class="logo side-logo" href="#/"><span class="dot"></span> Podcast Studio</a>
+    <nav>
+      <a href="#/" data-nav="home"><span class="ic">⌂</span> Home</a>
+      <a href="#/recordings" data-nav="recordings"><span class="ic">▤</span> Recordings</a>
+      <p class="navlabel">Create</p>
+      <a href="#/new" data-nav="new"><span class="ic rec-ic">●</span> Record</a>
+      <a href="tools/" data-nav="obs"><span class="ic">⧉</span> OBS links</a>
+      <p class="navlabel">Account</p>
+      <a href="#/settings" data-nav="settings"><span class="ic">⚙</span> Settings</a>
+    </nav>
+    <div class="side-foot">
+      <span class="avatar" id="avatar">?</span>
+      <div><div id="sideName">You</div><div class="mut small" id="sideStorage"></div></div>
+    </div>
+  </aside>
+  <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+  <main class="content" id="view"></main>
+</div>
+<div class="toast" id="toast"></div>
+<script type="module" src="dashboard.js"></script>
 </body>
 </html>

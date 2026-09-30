@@ -94,3 +94,4 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* ---------- thanks ---------- */
 .done { min-height: 100%; display: grid; place-items: center; text-align: center; padding: 24px 16px; }
 .done p { color: var(--mut); max-width: 420px; }
+.donelist { list-style: none; padding: 0; color: var(--mut); } .donelist li { margin: 6px 0; }

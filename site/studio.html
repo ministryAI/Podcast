@@ -37,6 +37,7 @@
       <span class="show" id="topShow"></span>
       <span class="pill" id="people">1 in studio</span>
       <span class="pill rec" id="recPill" hidden>REC 00:00</span>
+      <span class="pill" id="xferPill" hidden></span>
     </div>
     <button class="btn ghost" id="inviteBtn" hidden>🔗 Invite guests</button>
   </header>
@@ -56,11 +57,13 @@
   <div>
     <div class="logo" style="justify-content:center"><span class="dot"></span> Podcast Studio</div>
     <h2>Thanks for joining!</h2>
-    <p id="doneMsg">If a recording was made on your computer, it's in your Downloads folder (a .webm file). Please send it to your host.</p>
+    <p id="doneMsg">Thanks for joining!</p>
+    <ul id="doneList" class="donelist"></ul>
+    <a class="btn" id="openLib" hidden href="./">Open recording →</a>
   </div>
 </main>
 
 <div class="toast" id="toast"></div>
-<script src="studio.js"></script>
+<script type="module" src="studio.js"></script>
 </body>
 </html>

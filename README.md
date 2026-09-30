@@ -19,20 +19,24 @@ Guest browser ──WebRTC (P2P, TURN fallback)──▶ Host PC: OBS (one Brows
 | `docs/` | Episode runbook |
 
 ## Live site
-**https://ministryai.github.io/Podcast/**: your own branded studio
-(start session → green room → studio with invite, mute, camera, Record and leave).
-Old OBS link generator: `/Podcast/tools/`.
+**https://ministryai.github.io/Podcast/**
 
-![studio](docs/studio.png)
+| Dashboard | A recording |
+|---|---|
+| ![](docs/dashboard.png) | ![](docs/recording.png) |
 
-How it works: `site/studio.js` embeds VDO.Ninja (`/app/`) in an iframe, hides its UI
-(`site/vdo.css`), and drives it through the VDO.Ninja iframe API. Hitting **Record**
-starts a local high-quality recording on *every* participant's computer (files land in
-each person's Downloads). Late joiners are pulled into an in-progress recording.
-VDO.Ninja itself is served from **https://ministryai.github.io/podcast/app/**.
-Both are deployed by `.github/workflows/pages.yml` on every push and refreshed weekly.
+- **Dashboard** (`site/index.html`, `site/dashboard.js`): start sessions, see recents, browse
+  every recording, play and export tracks, record more takes into an existing session, settings.
+- **Studio** (`site/studio.html`, `site/studio.js`): green room, then a branded call on top of
+  self-hosted VDO.Ninja (`/app/`), driven through its iframe API.
+- **Recording** (`site/lib/recording.js`): Riverside-style. Every person records their own
+  camera and mic locally (MediaRecorder). Guests stream their file to the host *during* the
+  recording over an extra binary data channel on the existing WebRTC connection, with byte
+  offsets, backpressure and resume. **No downloads for anyone.** Files are stored in the
+  host browser's private storage (OPFS, `site/lib/store.js`, written from a worker), and the
+  guest's temporary copy is deleted once the host confirms receipt.
 
-One-time: repo **Settings → Pages → Source: GitHub Actions**.
+Deploys via `.github/workflows/pages.yml` on every push.
 
 ## Quick start
 **Phase 1 – zero cost, no server:** open `site/index.html` locally, keep the
