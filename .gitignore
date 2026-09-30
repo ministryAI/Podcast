@@ -1,0 +1,8 @@
+deploy/.env
+deploy/vdo.ninja/
+recordings/
+*.wav
+*.mp3
+*.webm
+*.mkv
+*.mp4
