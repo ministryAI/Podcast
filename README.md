@@ -19,7 +19,16 @@ Guest browser ──WebRTC (P2P, TURN fallback)──▶ Host PC: OBS (one Brows
 | `docs/` | Episode runbook |
 
 ## Live site
-**https://ministryai.github.io/podcast/** (the studio link generator)
+**https://ministryai.github.io/Podcast/**: your own branded studio
+(start session → green room → studio with invite, mute, camera, Record and leave).
+Old OBS link generator: `/Podcast/tools/`.
+
+![studio](docs/studio.png)
+
+How it works: `site/studio.js` embeds VDO.Ninja (`/app/`) in an iframe, hides its UI
+(`site/vdo.css`), and drives it through the VDO.Ninja iframe API. Hitting **Record**
+starts a local high-quality recording on *every* participant's computer (files land in
+each person's Downloads). Late joiners are pulled into an in-progress recording.
 VDO.Ninja itself is served from **https://ministryai.github.io/podcast/app/**.
 Both are deployed by `.github/workflows/pages.yml` on every push and refreshed weekly.
 

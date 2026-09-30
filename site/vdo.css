@@ -1,0 +1,16 @@
+/* Injected into the embedded VDO.Ninja page (&css=) to match the studio look. */
+body, #main, #gridlayout { background: #14161c !important; }
+#controlButtons, #header, #logoname, #head1, #head2, #head3, #head4,
+#chatModule, #recordLocalbutton, .credits, #helpbutton, #reportbutton { display: none !important; }
+#gridlayout > div, #gridlayout video {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+#gridlayout video { object-fit: cover !important; background: #0b0c10 !important; }
+.video-label, [data-label] {
+  font-family: Inter, system-ui, sans-serif !important;
+  background: rgba(11, 12, 16, .7) !important;
+  border-radius: 8px !important;
+  padding: 4px 10px !important;
+  font-size: 14px !important;
+}

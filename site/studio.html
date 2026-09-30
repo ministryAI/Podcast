@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Podcast Studio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Green room: check camera/mic before joining -->
+<main class="green" id="greenRoom">
+  <div class="wrap">
+    <div class="preview">
+      <video id="preview" autoplay muted playsinline></video>
+      <div class="off" id="previewOff">Allow camera &amp; microphone access to continue</div>
+      <div class="meter"><i id="meter"></i></div>
+    </div>
+    <form id="joinForm">
+      <div class="logo"><span class="dot"></span> <span id="showName">Podcast Studio</span></div>
+      <h2 id="greeting" style="margin-top:18px">You're invited</h2>
+      <p class="sub">Check how you look and sound, then join.</p>
+      <label class="field"><span>Your name</span><input id="name" required></label>
+      <label class="field"><span>Camera</span><select id="cam"></select></label>
+      <label class="field"><span>Microphone</span><select id="mic"></select></label>
+      <button class="btn" id="joinBtn">Join studio</button>
+      <p class="tip">🎧 Wear headphones, and use Chrome or Edge for the best recording.</p>
+    </form>
+  </div>
+</main>
+
+<!-- Studio -->
+<div class="studio" id="studio" hidden>
+  <header class="topbar">
+    <div class="title">
+      <div class="logo"><span class="dot"></span></div>
+      <span class="show" id="topShow"></span>
+      <span class="pill" id="people">1 in studio</span>
+      <span class="pill rec" id="recPill" hidden>REC 00:00</span>
+    </div>
+    <button class="btn ghost" id="inviteBtn" hidden>🔗 Invite guests</button>
+  </header>
+  <section class="stage"><iframe id="vdo" allow="camera;microphone;autoplay;fullscreen;display-capture;clipboard-write"></iframe></section>
+  <footer class="controls">
+    <button class="ctl" id="micBtn" title="Mute / unmute">🎙️</button>
+    <button class="ctl" id="camBtn" title="Camera on / off">📷</button>
+    <button class="ctl hide-sm" id="setBtn" title="Audio / video settings">⚙️</button>
+    <span class="sep" id="recSep" hidden></span>
+    <button class="recbtn" id="recBtn" hidden>Record</button>
+    <span class="sep"></span>
+    <button class="ctl leave" id="leaveBtn" title="Leave">📞</button>
+  </footer>
+</div>
+
+<main class="done" id="done" hidden>
+  <div>
+    <div class="logo" style="justify-content:center"><span class="dot"></span> Podcast Studio</div>
+    <h2>Thanks for joining!</h2>
+    <p id="doneMsg">If a recording was made on your computer, it's in your Downloads folder (a .webm file). Please send it to your host.</p>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+<script src="studio.js"></script>
+</body>
+</html>

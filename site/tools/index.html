@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Podcast Studio</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main>
+  <h1>🎙️ Podcast Studio</h1>
+  <p class="sub">Generate the links for an episode. Settings are saved in this browser.</p>
+
+  <section class="card">
+    <h2>Session</h2>
+    <label>Show name <input id="show" value="My Podcast"></label>
+    <label>Room name <input id="room" placeholder="auto-generated"></label>
+    <label>Room password (optional) <input id="password"></label>
+    <label>VDO.Ninja server <input id="server" value="https://vdo.ninja" placeholder="defaults to this site's /app/"></label>
+    <label>TURN (optional, from deploy/setup.sh) <input id="turn" placeholder="user;pass;turn:turn.example.com:3478"></label>
+    <label>Guests (one name per line) <textarea id="guests" rows="4">Host
+Guest 1</textarea></label>
+    <label class="row"><input type="checkbox" id="record" checked> Guests record locally in high quality (&amp;record)</label>
+    <button id="go">Generate links</button>
+  </section>
+
+  <section class="card" id="out" hidden>
+    <h2>Director (you)</h2>
+    <div id="director"></div>
+    <h2>Guest links: send one to each person</h2>
+    <div id="guestLinks"></div>
+    <h2>OBS Browser Sources (1920×1080, "Control audio via OBS" ✓)</h2>
+    <div id="obsLinks"></div>
+  </section>
+</main>
+<script src="links.js"></script>
+</body>
+</html>

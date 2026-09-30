@@ -7,32 +7,32 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main>
-  <h1>🎙️ Podcast Studio</h1>
-  <p class="sub">Generate the links for an episode. Settings are saved in this browser.</p>
-
-  <section class="card">
-    <h2>Session</h2>
-    <label>Show name <input id="show" value="My Podcast"></label>
-    <label>Room name <input id="room" placeholder="auto-generated"></label>
-    <label>Room password (optional) <input id="password"></label>
-    <label>VDO.Ninja server <input id="server" value="https://vdo.ninja" placeholder="defaults to this site's /app/"></label>
-    <label>TURN (optional, from deploy/setup.sh) <input id="turn" placeholder="user;pass;turn:turn.example.com:3478"></label>
-    <label>Guests (one name per line) <textarea id="guests" rows="4">Host
-Guest 1</textarea></label>
-    <label class="row"><input type="checkbox" id="record" checked> Guests record locally in high quality (&amp;record)</label>
-    <button id="go">Generate links</button>
-  </section>
-
-  <section class="card" id="out" hidden>
-    <h2>Director (you)</h2>
-    <div id="director"></div>
-    <h2>Guest links: send one to each person</h2>
-    <div id="guestLinks"></div>
-    <h2>OBS Browser Sources (1920×1080, "Control audio via OBS" ✓)</h2>
-    <div id="obsLinks"></div>
-  </section>
+<main class="landing">
+  <div class="box">
+    <div class="logo"><span class="dot"></span> Podcast Studio</div>
+    <h1>Record your show,<br>from anywhere.</h1>
+    <p class="lead">Start a session, send your guests one link, and every person records in high quality on their own computer.</p>
+    <form class="card" id="start">
+      <label class="field"><span>Show name</span><input id="show" required placeholder="My Podcast"></label>
+      <label class="field"><span>Your name</span><input id="name" required placeholder="Host"></label>
+      <label class="field"><span>Session password (optional)</span><input id="pw" placeholder="Keeps randoms out"></label>
+      <button class="btn">Start session →</button>
+    </form>
+    <p class="foot">Guests? Use the link your host sent you. · <a href="tools/">Advanced links for OBS</a></p>
+  </div>
 </main>
-<script src="app.js"></script>
+<script>
+  const $ = id => document.getElementById(id);
+  try { const s = JSON.parse(localStorage.getItem('studio-host') || '{}'); $('show').value = s.show || ''; $('name').value = s.name || ''; } catch {}
+  $('start').onsubmit = e => {
+    e.preventDefault();
+    const show = $('show').value.trim(), name = $('name').value.trim();
+    try { localStorage.setItem('studio-host', JSON.stringify({ show, name })); } catch {}
+    const room = (show.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 16) || 'show') + Math.random().toString(36).slice(2, 8);
+    const q = new URLSearchParams({ room, show, name, host: '1' });
+    if ($('pw').value) q.set('pw', $('pw').value);
+    location.href = 'studio.html?' + q;
+  };
+</script>
 </body>
 </html>

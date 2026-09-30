@@ -62,5 +62,5 @@ $('go').onclick = () => {
 };
 
 // Default to the VDO.Ninja copy hosted alongside this page (GitHub Pages: /podcast/app/).
-if (location.protocol.startsWith('http')) $('server').value = new URL('app/', location.href).href;
+if (location.protocol.startsWith('http')) $('server').value = new URL('../app/', location.href).href;
 load();
