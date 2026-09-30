@@ -18,6 +18,13 @@ Guest browser ──WebRTC (P2P, TURN fallback)──▶ Host PC: OBS (one Brows
 | `obs/` | OBS setup notes |
 | `docs/` | Episode runbook |
 
+## Live site
+**https://ministryai.github.io/podcast/** (the studio link generator)
+VDO.Ninja itself is served from **https://ministryai.github.io/podcast/app/**.
+Both are deployed by `.github/workflows/pages.yml` on every push and refreshed weekly.
+
+One-time: repo **Settings → Pages → Source: GitHub Actions**.
+
 ## Quick start
 **Phase 1 – zero cost, no server:** open `site/index.html` locally, keep the
 default server `https://vdo.ninja`, generate links, send guest links, paste the

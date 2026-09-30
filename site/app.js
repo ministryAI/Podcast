@@ -48,7 +48,7 @@ $('go').onclick = () => {
   const common = { room: $('room').value, password: $('password').value, turn: $('turn').value };
   const names = $('guests').value.split('\n').map(s => s.trim()).filter(Boolean);
 
-  $('director').replaceChildren(row('Director', url({ ...common, director: true })));
+  $('director').replaceChildren(row('Director', url({ director: common.room, password: common.password, turn: common.turn })));
   $('guestLinks').replaceChildren(...names.map(n => row(n, url({
     ...common, push: slug(n) + '_' + $('room').value.slice(-4), label: n,
     // proaudio: disables echo cancel/AGC and raises bitrate. Guests MUST wear headphones.
@@ -61,4 +61,6 @@ $('go').onclick = () => {
   $('out').hidden = false;
 };
 
+// Default to the VDO.Ninja copy hosted alongside this page (GitHub Pages: /podcast/app/).
+if (location.protocol.startsWith('http')) $('server').value = new URL('app/', location.href).href;
 load();
